@@ -59,7 +59,7 @@ public class SCRUMSprintUpdateStepDefinition {
 		// Verify that result of 2+2 is 4
 		Assert.assertEquals(result, expectedResult);
 		//Assert.assertNotSame(result, expectedResult);
-		driver.close();
+		//driver.close();
 	}
 	
 	@After

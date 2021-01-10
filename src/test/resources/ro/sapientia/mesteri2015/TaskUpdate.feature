@@ -1,4 +1,4 @@
-#Author: kozma.e.imre + GitHub@gmail.com
+#Author: your.email@your.domain.com
 #Keywords Summary :
 #Feature: List of scenarios.
 #Scenario: Business rule through list of steps with arguments.
@@ -17,19 +17,16 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag
-Feature: Create a task and delete it
+Feature: Update task
   I want to use this template for my feature file
 
   @tag1
-  Scenario: Create And Delete
-    Given I access the task list
-    And I press de add button
-    And I add the title "TaskForDeletion"
-    And I add the description "This will be deleted!"
-    And I press the add task button
-    When I access the task delete page
-    And I press the delete task button
-    And I press confirm delete button
-    Then I check the task list for task "TaskForDeletion"
+  Scenario: Update title and description
+    Given I access the task page
+    And I create a new task with title "Task for Update" and description "I am the creator!"
+    And I access the new task
+    When I press the update button
+    And Update the Task with title "Updated Task" and description "I am the updater!"
+    Then I would see a Task with updated title and description
 
 

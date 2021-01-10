@@ -4,8 +4,8 @@ Feature: Add task and check if is created
   I want to use this template for my feature file
 
   @tag1
-  Scenario: Acces Add Task Page
-    Given I acces the task list page
+  Scenario: Access Add Task Page
+    Given I access the task list page
     When I press the add button
     Then I should enter in the add task page
 

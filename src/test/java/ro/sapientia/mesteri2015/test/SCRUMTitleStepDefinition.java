@@ -26,7 +26,7 @@ public class SCRUMTitleStepDefinition {
 	@Given("^I open the scrum tool add page$")
 	public void I_open_the_scrum_tool_add_page() throws Throwable {
 		// Set implicit wait of 10 seconds and launch google
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("http://localhost:8080/");
 	}
 
@@ -60,7 +60,7 @@ public class SCRUMTitleStepDefinition {
 
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		//driver.quit();
 	}
 
 }

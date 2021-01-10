@@ -55,7 +55,7 @@ public class SCRUMTitleStepDefinition {
 		// Verify that result of 2+2 is 4
 		Assert.assertEquals(result, expectedResult);
 
-		driver.close();
+		//driver.close();
 	}
 
 	@After

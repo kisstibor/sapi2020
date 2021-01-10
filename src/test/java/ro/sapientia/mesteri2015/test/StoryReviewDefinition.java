@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -61,10 +62,15 @@ public class StoryReviewDefinition {
 	@Then("^I should get result \"([^\"]*)\" in the story view$")
 	public void I_should_get_result_in_the_story_view(String reviewStatus) throws Throwable {
 
-		WebElement calculatorTextBox = driver.findElement(By.id("review-status"));
-		String result = calculatorTextBox.getText();
+		WebElement reviewStatusField = driver.findElement(By.id("review-status"));
+		String result = reviewStatusField.getText();
 
 		Assert.assertEquals(result, reviewStatus);
-		
+		//driver.close();
+	}
+	
+	@After
+	public void closeBrowser() {
+		driver.quit();
 	}
 }

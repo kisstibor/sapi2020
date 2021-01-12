@@ -14,7 +14,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class SCRUMTitleStepDefinition {
+public class USERTitleStepDefinition {
 
 	protected WebDriver driver;
 
@@ -23,14 +23,14 @@ public class SCRUMTitleStepDefinition {
 		driver = new FirefoxDriver();
 	}
 
-	@Given("^I open the scrum tool add page$")
-	public void I_open_the_scrum_tool_add_page() throws Throwable {
+	@Given("^I open the scrum tool user's add page$")
+	public void I_open_the_scrum_tool_users_add_page() throws Throwable {
 		// Set implicit wait of 10 seconds and launch google
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080//scrumsapientiao");
+		driver.get("http://localhost:8080/scrumsapientia/user");
 	}
 
-	@When("^I enter \"([^\"]*)\" in  the title textbox and I push the add button$")
+	@When("^I enter \\\"([^\\\"]*)\\\" in  the name textbox and I push the add button$")
 	public void I_enter_in_the_title_textbox_and_I_push_the_add_button(
 			String additionTerms) throws Throwable {
 		WebElement addButton = driver.findElement(By.id("add-button"));
@@ -46,7 +46,8 @@ public class SCRUMTitleStepDefinition {
 		searchButton.click();
 	}
 
-	@Then("^I should get result \"([^\"]*)\" in stories list$")
+	
+	@Then("^I should get result \\\"([^\\\"]*)\\\" in users list$")
 	public void I_should_get_result_in_stories_list(String expectedResult)
 			throws Throwable {
 		WebElement calculatorTextBox = driver.findElement(By.id("story-title"));

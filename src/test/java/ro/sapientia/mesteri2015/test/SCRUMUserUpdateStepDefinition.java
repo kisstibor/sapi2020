@@ -15,7 +15,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class SCRUMSprintUpdateStepDefinition {
+public class SCRUMUserUpdateStepDefinition {
 
 	protected WebDriver driver;
 
@@ -24,14 +24,14 @@ public class SCRUMSprintUpdateStepDefinition {
 		driver = new FirefoxDriver();
 	}
 
-	@Given("^I edit the scrum list's first story$")
+	@Given("^I edit the user list's first user$")
 	public void I_edit_the_scrum_list_s_first_story() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/scrumsapientia");
+		driver.get("http://localhost:8080/scrumsapientia/user");
 	}
-
-	@When("^I enter \"([^\"]*)\" in  the title textbox and I push the update button$")
+	
+	@When("^I enter \\\"([^\\\"]*)\\\" in  the name textbox and I push the update button$")
 	public void I_enter_in_the_title_textbox_and_I_push_the_update_button(String updateTitle) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		WebElement addButton = driver.findElement(By.id("story-1"));
@@ -50,7 +50,7 @@ public class SCRUMSprintUpdateStepDefinition {
 	
 	}
 	
-	@Then("^I should get result \"([^\"]*)\" in new stories list$")
+	@Then("^I should get result \\\"([^\\\"]*)\\\" in new user list$")
 	public void I_should_get_result_in_new_stories_list(String expectedResult) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		WebElement titleText = driver.findElement(By.id("story-title"));

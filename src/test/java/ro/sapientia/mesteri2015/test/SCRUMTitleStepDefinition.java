@@ -58,9 +58,5 @@ public class SCRUMTitleStepDefinition {
 		driver.close();
 	}
 
-	@After
-	public void closeBrowser() {
-		driver.quit();
-	}
 
 }

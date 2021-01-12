@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
@@ -23,6 +24,12 @@ public class SCRUMSprintUpdateStepDefinition {
 	public void setup() {
 		driver = new FirefoxDriver();
 	}
+
+	@After
+	public void closeBrowser() {
+		driver.quit();
+	}
+
 
 	@Given("^I edit the scrum list's first story$")
 	public void I_edit_the_scrum_list_s_first_story() throws Throwable {
@@ -44,12 +51,12 @@ public class SCRUMSprintUpdateStepDefinition {
 		titleField.sendKeys(Keys.CONTROL + "a");
 		titleField.sendKeys(Keys.DELETE);
 		titleField.sendKeys(updateTitle);
-		
+
 		WebElement updateStoryButton = driver.findElement(By.id("update-story-button"));
 		updateStoryButton.click();
-	
+
 	}
-	
+
 	@Then("^I should get result \"([^\"]*)\" in new stories list$")
 	public void I_should_get_result_in_new_stories_list(String expectedResult) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
@@ -59,12 +66,5 @@ public class SCRUMSprintUpdateStepDefinition {
 		// Verify that result of 2+2 is 4
 		Assert.assertEquals(result, expectedResult);
 		//Assert.assertNotSame(result, expectedResult);
-		driver.close();
 	}
-	
-	@After
-	public void closeBrowser() {
-		driver.quit();
-	}
-
 }

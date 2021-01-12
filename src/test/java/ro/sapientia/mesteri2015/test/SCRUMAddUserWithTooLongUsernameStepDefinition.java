@@ -18,50 +18,45 @@ import cucumber.api.java.en.When;
 
 public class SCRUMAddUserWithTooLongUsernameStepDefinition {
 	
-protected WebDriver driver;
-	
 	@Before
 	public void setup() {
-		driver = new FirefoxDriver();
+		WebDriverHelper.openBrowser();
 	}
-
+	
 	@Given("^I open the add user page$")
 	public void I_open_the_add_user_page() throws Throwable {
 		// Set implicit wait of 10 seconds and launch google
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		WebDriverHelper.get("http://localhost:8080/");
 		
-		WebElement addUserButton = driver.findElement(By.id("add-user-main-button"));
+		WebElement addUserButton = WebDriverHelper.findElement(By.id("add-user-main-button"));
 		addUserButton.click();
 	}
 
 	@When("^I enter long username \"([^\"]*)\" in the username textbox, \"([^\"]*)\" in the password textbox and I push the add button$")
 	public void I_enter_long_username_in_textbox_in_the_password_textbox_and_I_push_the_add_button(String username, String password) throws Throwable {
-		WebElement usernameTextBox = driver.findElement(By.id("user-username"));
+		WebElement usernameTextBox = WebDriverHelper.findElement(By.id("user-username"));
 		usernameTextBox.clear();
 		usernameTextBox.sendKeys(username);
 		
-		WebElement passwordTextBox = driver.findElement(By.id("user-password"));
+		WebElement passwordTextBox = WebDriverHelper.findElement(By.id("user-password"));
 		passwordTextBox.clear();
 		passwordTextBox.sendKeys(password);
 
-		WebElement addButton = driver.findElement(By.id("add-user-button"));
+		WebElement addButton = WebDriverHelper.findElement(By.id("add-user-button"));
 		addButton.click();
 	}
 
 	@Then("^I should get error result for username saying: \"([^\"]*)\"$")
 	public void I_should_get_error_result_for_username(String expectedError) throws Throwable {
-		WebElement error = driver.findElement(By.id("error-username"));
+		WebElement error = WebDriverHelper.findElement(By.id("error-username"));
 		String errorMessage = error.getText();
 		
 		Assert.assertEquals(expectedError, errorMessage);
-		
-		driver.close();
 	}
 
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		WebDriverHelper.closeBrowser();
 	}
 
 }

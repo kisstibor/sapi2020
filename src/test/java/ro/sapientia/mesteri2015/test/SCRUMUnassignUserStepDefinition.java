@@ -18,32 +18,29 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class SCRUMUnassignUserStepDefinition {
-	
-protected WebDriver driver;
-	
+		
 	@Before
 	public void setup() {
-		driver = new FirefoxDriver();
+		WebDriverHelper.openBrowser();
 	}
-
+	
 	@Given("^I open the scrum tool story edit page$")
 	public void I_open_the_scrum_tool_story_edit_page() throws Throwable {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		WebDriverHelper.get("http://localhost:8080/");
 		
-		List<WebElement> anchors = driver.findElements(By.cssSelector("#story-list > div > a"));
+		List<WebElement> anchors = WebDriverHelper.findElements(By.cssSelector("#story-list > div > a"));
 		anchors.get(0).click();
 		
-		WebElement updateButton = driver.findElement(By.id("action-update-button"));
+		WebElement updateButton = WebDriverHelper.findElement(By.id("action-update-button"));
 		updateButton.click();
 	}
 
 	@When("^I deselect the user from the combo box and I push the \"Update\" button$")
 	public void I_deselect_the_user_from_the_combo_box_and_I_push_the_Update_button() throws Throwable {
-		Select userComboBox = new Select(driver.findElement(By.id("story-user")));
+		Select userComboBox = new Select(WebDriverHelper.findElement(By.id("story-user")));
 		userComboBox.selectByIndex(0);
 		
-		WebElement filterButton = driver.findElement(By.id("update-story-button"));
+		WebElement filterButton = WebDriverHelper.findElement(By.id("update-story-button"));
 		filterButton.click();
 	}
 
@@ -51,20 +48,18 @@ protected WebDriver driver;
 	public void I_should_not_see_the_Assigned_to_user1_text_on_the_detail_page() throws Throwable {
 		boolean elementFound = true;
 		try {
-			driver.findElement(By.id("assignedTo"));
+			WebDriverHelper.findElement(By.id("assignedTo"));
 		}
 		catch (NoSuchElementException ex) {
 			elementFound = false;
 		}
 		
 		Assert.assertFalse(elementFound);
-
-		driver.close();
 	}
-
+	
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		WebDriverHelper.closeBrowser();
 	}
 
 }

@@ -18,44 +18,39 @@ import cucumber.api.java.en.When;
 
 public class SCRUMFilterStoriesStepDefinition {
 	
-	protected WebDriver driver;
-	
 	@Before
 	public void setup() {
-		driver = new FirefoxDriver();
+		WebDriverHelper.openBrowser();
 	}
-
+	
 	@Given("^I open the scrum tool story list page$")
 	public void I_open_the_scrum_tool_story_list_page() throws Throwable {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		WebDriverHelper.get("http://localhost:8080/");
 	}
 
 	@When("^I enter \"([^\"]*)\" in the filter textbox and I push the \"Filter\" button$")
 	public void I_enter_story_in_the_filter_textbox_and_I_push_the_Filter_button(String filterText) throws Throwable {
-		WebElement storyTitleFilterInput = driver.findElement(By.id("query-text"));
+		WebElement storyTitleFilterInput = WebDriverHelper.findElement(By.id("query-text"));
 		storyTitleFilterInput.clear();
 		storyTitleFilterInput.sendKeys(filterText);
 		
-		WebElement filterButton = driver.findElement(By.id("filter-button"));
+		WebElement filterButton = WebDriverHelper.findElement(By.id("filter-button"));
 		filterButton.click();
 	}
 
 	@Then("^I should get a single result: \"([^\"]*)\"$")
 	public void I_should_get_a_single_result_Story_for_user1(String expectedStoryTitle) throws Throwable {
-		List<WebElement> innerDivs = driver.findElements(By.cssSelector("#story-list > div"));
+		List<WebElement> innerDivs = WebDriverHelper.findElements(By.cssSelector("#story-list > div"));
 		Assert.assertEquals(1, innerDivs.size());
 		
 		WebElement anchor = innerDivs.get(0).findElement(By.cssSelector("a"));
 		String actualStoryTitle = anchor.getText();
 		Assert.assertEquals(expectedStoryTitle, actualStoryTitle);
-
-		driver.close();
 	}
-
+	
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		WebDriverHelper.closeBrowser();
 	}
 
 }

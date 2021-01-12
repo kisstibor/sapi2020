@@ -18,57 +18,51 @@ import cucumber.api.java.en.When;
 
 public class SCRUMAddUserStepDefinition {
 	
-	protected WebDriver driver;
-	
 	@Before
 	public void setup() {
-		driver = new FirefoxDriver();
+		WebDriverHelper.openBrowser();
 	}
 
 	@Given("^I open the scrum tool add user page$")
 	public void I_open_the_scrum_tool_add_user_page() throws Throwable {
 		// Set implicit wait of 10 seconds and launch google
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		WebDriverHelper.get("http://localhost:8080/");
 		
-		WebElement addUserButton = driver.findElement(By.id("add-user-main-button"));
+		WebElement addUserButton = WebDriverHelper.findElement(By.id("add-user-main-button"));
 		addUserButton.click();
 	}
 
 	@When("^I enter \"([^\"]*)\" in the username textbox, \"([^\"]*)\" in the password textbox and I push the add button$")
 	public void I_enter_in_the_username_textbox_in_the_password_textbox_and_I_push_the_add_button(
 			String username, String password) throws Throwable {
-		WebElement usernameTextBox = driver.findElement(By.id("user-username"));
+		WebElement usernameTextBox = WebDriverHelper.findElement(By.id("user-username"));
 		usernameTextBox.clear();
 		usernameTextBox.sendKeys(username);
 		
-		WebElement passwordTextBox = driver.findElement(By.id("user-password"));
+		WebElement passwordTextBox = WebDriverHelper.findElement(By.id("user-password"));
 		passwordTextBox.clear();
 		passwordTextBox.sendKeys(password);
 
-		WebElement addButton = driver.findElement(By.id("add-user-button"));
+		WebElement addButton = WebDriverHelper.findElement(By.id("add-user-button"));
 		addButton.click();
 	}
 
 	@Then("^I should get result \"([^\"]*)\" in assign to combo box on add story page$")
 	public void I_should_get_result_in_assign_to_combobox_on_add_story_page(String expectedUsername)
 			throws Throwable {
-		WebElement addStoryButton = driver.findElement(By.id("add-button"));
+		WebElement addStoryButton = WebDriverHelper.findElement(By.id("add-button"));
 		addStoryButton.click();
 		
-		WebElement storyUserElement = driver.findElement(By.id("story-user"));
+		WebElement storyUserElement = WebDriverHelper.findElement(By.id("story-user"));
 		Select userSelectElement = new Select(storyUserElement);
 		List<WebElement> options = userSelectElement.getOptions();
 		
 		Assert.assertEquals(2, options.size());
 		Assert.assertEquals(expectedUsername, options.get(1).getText());
-
-		driver.close();
 	}
 
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		WebDriverHelper.closeBrowser();
 	}
-
 }

@@ -15,7 +15,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class DSCRUMSprintUpdateStepDefinition {
+public class ESCRUMPriorityUpdateStepDefinition {
 
 	protected WebDriver driver;
 
@@ -24,36 +24,36 @@ public class DSCRUMSprintUpdateStepDefinition {
 		driver = new FirefoxDriver();
 	}
 
-	@Given("^I edit the scrum list's first story$")
-	public void I_edit_the_scrum_list_s_first_story() throws Throwable {
+	@Given("^I edit the scrum list's first priority$")
+	public void I_edit_the_scrum_list_s_first_priority() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		driver.get("http://localhost:8080/priority/list");
 	}
 
-	@When("^I enter \"([^\"]*)\" in  the title textbox and I push the update button$")
-	public void I_enter_in_the_title_textbox_and_I_push_the_update_button(String updateTitle) throws Throwable {
+	@When("^I enter \"([^\"]*)\" in  the name textbox and I push the update button$")
+	public void I_enter_in_the_name_textbox_and_I_push_the_update_button(String updateTitle) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
-		WebElement addButton = driver.findElement(By.id("story-1"));
+		WebElement addButton = driver.findElement(By.id("priority-1"));
 		addButton.click();
 		//driver.wait(1000);
 		WebElement updateButton = driver.findElement(By.id("action-update-button"));
 		updateButton.click();
 		//driver.wait(1000);
-		WebElement titleField = driver.findElement(By.id("story-title"));
+		WebElement titleField = driver.findElement(By.id("priority-name"));
 		titleField.sendKeys(Keys.CONTROL + "a");
 		titleField.sendKeys(Keys.DELETE);
 		titleField.sendKeys(updateTitle);
 		
-		WebElement updateStoryButton = driver.findElement(By.id("update-story-button"));
+		WebElement updateStoryButton = driver.findElement(By.id("update-priority-button"));
 		updateStoryButton.click();
 	
 	}
 	
-	@Then("^I should get result \"([^\"]*)\" in new stories list$")
-	public void I_should_get_result_in_new_stories_list(String expectedResult) throws Throwable {
+	@Then("^I should get result \"([^\"]*)\" in new priority list$")
+	public void I_should_get_result_in_new_priority_list(String expectedResult) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
-		WebElement titleText = driver.findElement(By.id("story-title"));
+		WebElement titleText = driver.findElement(By.id("priority-name"));
 		String result = titleText.getText();
 
 		// Verify that result of 2+2 is 4

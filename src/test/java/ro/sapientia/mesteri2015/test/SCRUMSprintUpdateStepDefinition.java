@@ -31,7 +31,7 @@ public class SCRUMSprintUpdateStepDefinition {
 		driver.get("http://localhost:8080/");
 	}
 
-	@When("^I enter \"([^\"]*)\" in  the title textbox and I push the update button$")
+	@When("^I enter \"([^\"]*)\" in the title textbox and I push the update button$")
 	public void I_enter_in_the_title_textbox_and_I_push_the_update_button(String updateTitle) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		WebElement addButton = driver.findElement(By.id("story-1"));
@@ -62,9 +62,30 @@ public class SCRUMSprintUpdateStepDefinition {
 		driver.close();
 	}
 	
-	@After
-	public void closeBrowser() {
-		driver.quit();
+	@Given("^I open the add story page$")
+	public void I_open_the_add_story_page() throws Throwable {
+	    // Express the Regexp above with the code you wish you had
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.get("http://localhost:8080/story/add");
+	}
+	
+	@When("^I enter \"([^\"]*)\" in the title textbox and I push the add button$")
+	public void I_enter_in_the_title_textbox_and_I_push_the_add_button(String updateTitle) throws Throwable {
+		WebElement titleField = driver.findElement(By.id("story-title"));
+		titleField.clear();
+		titleField.sendKeys(updateTitle);
+		
+		WebElement updateStoryButton = driver.findElement(By.id("add-story-button"));
+		updateStoryButton.click();
+	}
+	
+	@Then("^I should get the story with \"([^\"]*)\" title$")
+	public void I_should_get_the_story_with_title(String expectedResult) throws Throwable {
+		WebElement titleText = driver.findElement(By.id("story-title"));
+		String result = titleText.getText();
+
+		Assert.assertEquals(result, expectedResult);
+		driver.close();
 	}
 
 }

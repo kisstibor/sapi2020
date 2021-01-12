@@ -21,6 +21,8 @@ public class SCRUMSprintUpdateStepDefinition {
 
 	@Before
 	public void setup() {
+
+		System.setProperty("webdriver.gecko.driver","C:\\Program Files\\Gecko\\geckodriver.exe");
 		driver = new FirefoxDriver();
 	}
 
@@ -28,7 +30,7 @@ public class SCRUMSprintUpdateStepDefinition {
 	public void I_edit_the_scrum_list_s_first_story() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		driver.get("http://localhost:8080/story");
 	}
 
 	@When("^I enter \"([^\"]*)\" in  the title textbox and I push the update button$")
@@ -44,12 +46,12 @@ public class SCRUMSprintUpdateStepDefinition {
 		titleField.sendKeys(Keys.CONTROL + "a");
 		titleField.sendKeys(Keys.DELETE);
 		titleField.sendKeys(updateTitle);
-		
+
 		WebElement updateStoryButton = driver.findElement(By.id("update-story-button"));
 		updateStoryButton.click();
-	
+
 	}
-	
+
 	@Then("^I should get result \"([^\"]*)\" in new stories list$")
 	public void I_should_get_result_in_new_stories_list(String expectedResult) throws Throwable {
 	    // Express the Regexp above with the code you wish you had
@@ -59,9 +61,9 @@ public class SCRUMSprintUpdateStepDefinition {
 		// Verify that result of 2+2 is 4
 		Assert.assertEquals(result, expectedResult);
 		//Assert.assertNotSame(result, expectedResult);
-		driver.close();
+		//driver.close();
 	}
-	
+
 	@After
 	public void closeBrowser() {
 		driver.quit();

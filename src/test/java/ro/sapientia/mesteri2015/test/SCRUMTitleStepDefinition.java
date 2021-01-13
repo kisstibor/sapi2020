@@ -25,7 +25,6 @@ public class SCRUMTitleStepDefinition {
 
 	@Given("^I open the scrum tool add page$")
 	public void I_open_the_scrum_tool_add_page() throws Throwable {
-		// Set implicit wait of 10 seconds and launch google
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get("http://localhost:8080/");
 	}
@@ -36,12 +35,10 @@ public class SCRUMTitleStepDefinition {
 		WebElement addButton = driver.findElement(By.id("add-button"));
 		addButton.click();
 
-		// Write term in google textbox
 		WebElement titleTextBox = driver.findElement(By.id("story-title"));
 		titleTextBox.clear();
 		titleTextBox.sendKeys(additionTerms);
 
-		// Click on searchButton
 		WebElement searchButton = driver.findElement(By.id("add-story-button"));
 		searchButton.click();
 	}
@@ -52,7 +49,6 @@ public class SCRUMTitleStepDefinition {
 		WebElement calculatorTextBox = driver.findElement(By.id("story-title"));
 		String result = calculatorTextBox.getText();
 
-		// Verify that result of 2+2 is 4
 		Assert.assertEquals(result, expectedResult);
 
 		driver.close();
@@ -60,7 +56,7 @@ public class SCRUMTitleStepDefinition {
 
 	@After
 	public void closeBrowser() {
-		driver.quit();
+		//driver.quit();
 	}
 
 }
